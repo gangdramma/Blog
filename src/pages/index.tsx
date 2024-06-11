@@ -1,6 +1,6 @@
-import Button from "@mui/material/Button";
 import Head from "next/head";
 import React from "react";
+import { Hero } from "src/components";
 import Layout from "src/layout/layout";
 
 const IndexPage = () => {
@@ -10,6 +10,7 @@ const IndexPage = () => {
         <Head>
           <title>Blog App</title>
         </Head>
+        <Hero />
       </Layout>
     </>
   );

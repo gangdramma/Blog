@@ -40,7 +40,7 @@ const Navbar = (props: Props) => {
           paddingX: "20px",
         }}
       >
-        <Typography variant="h6" sx={{ my: 2 }}>
+        <Typography variant="h6" sx={{ my: 2, cursor: "pointer" }}>
           BLOG
         </Typography>
         <CloseIcon />
@@ -63,7 +63,7 @@ const Navbar = (props: Props) => {
 
   return (
     <Box height={"10vh"} sx={{ display: "flex" }}>
-      <AppBar component="nav">
+      <AppBar component="nav" sx={{ background: "#272727" }}>
         <Toolbar sx={{ background: "#272727" }}>
           <IconButton
             color="inherit"
@@ -77,7 +77,10 @@ const Navbar = (props: Props) => {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", sm: "block", cursor: "pointer" },
+            }}
           >
             BLOG
           </Typography>
