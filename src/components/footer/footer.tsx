@@ -32,6 +32,7 @@ const Footer = () => {
               outline: "none",
             },
           }}
+          href="https://t.me/gang_dramma"
         >
           <TelegramIcon />
         </Button>
@@ -46,6 +47,7 @@ const Footer = () => {
               outline: "none",
             },
           }}
+          href="https://www.instagram.com/gang_dramma?igsh=MWYyZnZsMXJ5czIxYQ=="
         >
           <InstagramIcon />
         </Button>
