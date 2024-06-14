@@ -3,7 +3,6 @@ import React, { Fragment } from "react";
 import Image from "next/image";
 import { SidebarProps } from "./sidebar.props";
 import { format } from "date-fns";
-import { calculateTime } from "src/helpers/time";
 import { useRouter } from "next/router";
 
 const Sidebar = ({ LatestBlogs, categories }: SidebarProps) => {
@@ -30,6 +29,7 @@ const Sidebar = ({ LatestBlogs, categories }: SidebarProps) => {
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             {LatestBlogs.map((blog) => (
               <Box
+                key={blog.id}
                 marginTop={"20px"}
                 sx={{ cursor: "pointer" }}
                 onClick={() => router.push(`/blog/${blog.slug}`)}
@@ -58,7 +58,6 @@ const Sidebar = ({ LatestBlogs, categories }: SidebarProps) => {
                         <Typography>{blog.author.name}</Typography>
                         <Box color={"gray"}>
                           {format(blog.createdAt, "dd MMM, yyyy")}
-                          {/* {calculateTime(blog.description.text)} min read */}
                         </Box>
                       </Box>
                     </Box>

@@ -12,6 +12,7 @@ const Content = ({ blogs }: ContentProps) => {
     <Box width={{ xs: "100%", md: "70%" }}>
       {blogs.map((blog) => (
         <Box
+          key={blog.id}
           sx={{
             backgroundColor: "rgba(0, 0, 0, .5)",
             padding: "20px",
