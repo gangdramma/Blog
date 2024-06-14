@@ -54,7 +54,7 @@ const Sidebar = ({ LatestBlogs, categories }: SidebarProps) => {
                         <Typography>{blog.author.name}</Typography>
                         <Box color={"gray"}>
                           {format(blog.createdAt, "dd MMM, yyyy")} &#x2022;{" "}
-                          {calculateTime(blog.description.text)} min read
+                          {/* {calculateTime(blog.description.text)} min read */}
                         </Box>
                       </Box>
                     </Box>
