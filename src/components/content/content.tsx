@@ -3,10 +3,11 @@ import Image from "next/image";
 import React from "react";
 import { format } from "date-fns";
 import { ContentProps } from "./content.props";
+import { calculateTime } from "src/helpers/time";
 
 const Content = ({ blogs }: ContentProps) => {
   return (
-    <Box width={{ xs: "100%", md: "70%" }}>
+    <Box width={{ xs: "100%", md: "70%" }} sx={{ cursor: "pointer" }}>
       {blogs.map((blog) => (
         <Box
           sx={{
@@ -41,7 +42,8 @@ const Content = ({ blogs }: ContentProps) => {
             <Box>
               <Typography>{blog.author.name}</Typography>
               <Box color={"gray"}>
-                {format(blog.createdAt, "dd MMM, yyyy")} &#x2022; 5min read
+                {format(blog.createdAt, "dd MMM, yyyy")} &#x2022;{" "}
+                {calculateTime(blog.description.text)} min read
               </Box>
             </Box>
           </Box>

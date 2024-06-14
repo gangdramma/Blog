@@ -7,7 +7,7 @@ import { IEntity } from "src/interfaces/blogs";
 import Layout from "src/layout/layout";
 import { BlogService } from "src/services/blog.service";
 
-const IndexPage = ({ blogs, LatestBlogs }: HomePageProps) => {
+const IndexPage = ({ blogs, LatestBlogs, categories }: HomePageProps) => {
   console.log(LatestBlogs);
   return (
     <>
@@ -23,7 +23,7 @@ const IndexPage = ({ blogs, LatestBlogs }: HomePageProps) => {
             flexDirection: { xs: "column", md: "row" },
           }}
         >
-          <Sidebar LatestBlogs={LatestBlogs} />
+          <Sidebar LatestBlogs={LatestBlogs} categories={categories} />
           <Content blogs={blogs} />
         </Box>
       </Layout>
@@ -38,10 +38,12 @@ export const getServerSideProps: GetServerSideProps<
 > = async () => {
   const blogs = await BlogService.getAllBlogs();
   const LatestBlogs = await BlogService.getLatestBlogs();
+  const categories = await BlogService.getCategories();
   return {
     props: {
       blogs,
       LatestBlogs,
+      categories,
     },
   };
 };
@@ -49,4 +51,5 @@ export const getServerSideProps: GetServerSideProps<
 interface HomePageProps {
   blogs: IEntity.Blogs;
   LatestBlogs: IEntity.Blog[];
+  categories: IEntity.Categories[];
 }

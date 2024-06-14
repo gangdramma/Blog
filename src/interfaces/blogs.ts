@@ -20,6 +20,13 @@ export namespace IEntity {
         url: string;
       };
     };
+    description: {
+      text: string;
+    };
+  }
+  export interface Categories {
+    label: string;
+    slug: string;
   }
 
   export type Blogs = Blog[];

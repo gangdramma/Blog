@@ -3,10 +3,11 @@ import React, { Fragment } from "react";
 import Image from "next/image";
 import { SidebarProps } from "./sidebar.props";
 import { format } from "date-fns";
+import { calculateTime } from "src/helpers/time";
 
-const Sidebar = ({ LatestBlogs }: SidebarProps) => {
+const Sidebar = ({ LatestBlogs, categories }: SidebarProps) => {
   return (
-    <Box width={{ xs: "100%", md: "30%" }}>
+    <Box width={{ xs: "100%", md: "30%" }} sx={{ cursor: "pointer" }}>
       <Box
         position={"sticky"}
         top={"100px"}
@@ -41,15 +42,13 @@ const Sidebar = ({ LatestBlogs }: SidebarProps) => {
                     }}
                   >
                     <Typography variant="body1">{blog.title}</Typography>
-                    <Box
-                      sx={{ display: "flex", gap: "10px", marginTop: "10px" }}
-                    >
+                    <Box sx={{ display: "flex", gap: "10px" }}>
                       <Avatar alt={blog.title} src={blog.author.avatar.url} />
                       <Box>
                         <Typography>{blog.author.name}</Typography>
                         <Box color={"gray"}>
-                          {format(blog.createdAt, "dd MMM, yyyy")} &#x2022; 5min
-                          read
+                          {format(blog.createdAt, "dd MMM, yyyy")} &#x2022;{" "}
+                          {calculateTime(blog.description.text)} min read
                         </Box>
                       </Box>
                     </Box>
@@ -70,15 +69,15 @@ const Sidebar = ({ LatestBlogs }: SidebarProps) => {
         >
           <Typography variant="h5">Category</Typography>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
-            {LatestBlogs.map((nav) => (
-              <Fragment key={nav.id}>
-                {nav.category && (
+            {categories.map((nav) => (
+              <Fragment key={nav.slug}>
+                {nav.label && (
                   <>
                     <Button
                       fullWidth
                       sx={{ justifyContent: "flex-start", height: "50px" }}
                     >
-                      {nav.category.label}
+                      {nav.label}
                     </Button>
                     <Divider sx={{ marginTop: "5px" }} />
                   </>

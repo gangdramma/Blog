@@ -34,6 +34,9 @@ export const BlogService = {
               url
             }
           }
+          description {
+            text
+          }
         }
       }
     `;
@@ -56,15 +59,14 @@ export const BlogService = {
           image {
             url
           }
-          category {
-            label
-            slug
-          }
           author {
             name
             avatar {
               url
             }
+          }
+          description {
+            text
           }
         }
       }
@@ -74,6 +76,26 @@ export const BlogService = {
       return result.blogs as IEntity.Blogs;
     } catch (error) {
       console.error("Error fetching latest blogs:", error);
+      throw error;
+    }
+  },
+  async getCategories(): Promise<IEntity.Categories[]> {
+    const query = gql`
+      query getCategories {
+        categories {
+          slug
+          label
+        }
+      }
+    `;
+    try {
+      const result = await request<{ categories: IEntity.Categories[] }>(
+        graphqlAPI,
+        query
+      );
+      return result.categories;
+    } catch (error) {
+      console.error("Error fetching categories:", error);
       throw error;
     }
   },
