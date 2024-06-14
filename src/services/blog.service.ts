@@ -4,9 +4,7 @@ import { IEntity } from "src/interfaces/blogs";
 const graphqlAPI = process.env.HYGRAPH_ENDPOINT as string;
 
 if (!graphqlAPI) {
-  throw new Error(
-    "HYGRAPH_ENDPOINT is not defined in the environment variables."
-  );
+  throw new Error("endpoint is not defined in the environment variables.");
 }
 
 export const BlogService = {
@@ -99,9 +97,9 @@ export const BlogService = {
       throw error;
     }
   },
-  async getDetails(slug: string) {
+  async getDetails(slug: string): Promise<IEntity.Blog> {
     const query = gql`
-      query getDetails($slug: String) {
+      query getDetails($slug: String!) {
         blog(where: { slug: $slug }) {
           createdAt
           excerpt
@@ -134,5 +132,40 @@ export const BlogService = {
       slug,
     });
     return result.blog;
+  },
+  async getCategoriesSimple(slug: string): Promise<IEntity.Blog[]> {
+    const query = gql`
+      query getCategoriesBlog($slug: String!) {
+        blogs(where: { category: { slug: $slug } }) {
+          createdAt
+          excerpt
+          id
+          publishedAt
+          slug
+          title
+          updatedAt
+          image {
+            url
+          }
+          category {
+            label
+            slug
+          }
+          author {
+            name
+            avatar {
+              url
+            }
+          }
+          description {
+            text
+          }
+        }
+      }
+    `;
+    const result = await request<{ blogs: IEntity.Blog[] }>(graphqlAPI, query, {
+      slug,
+    });
+    return result.blogs;
   },
 };
