@@ -13,7 +13,11 @@ const Sidebar = ({ LatestBlogs, categories }: SidebarProps) => {
       <Box
         position={"sticky"}
         top={"100px"}
-        sx={{ transition: "all .3s ease", borderRadius: "8px" }}
+        sx={{
+          transition: "all .3s ease",
+          borderRadius: "8px",
+          boxShadow: "0px 8px 16px rgba(255, 255, 255, .1)",
+        }}
       >
         <Box
           sx={{
