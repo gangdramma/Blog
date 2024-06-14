@@ -4,10 +4,12 @@ import React from "react";
 import { format } from "date-fns";
 import { ContentProps } from "./content.props";
 import { calculateTime } from "src/helpers/time";
+import { useRouter } from "next/router";
 
 const Content = ({ blogs }: ContentProps) => {
+  const router = useRouter();
   return (
-    <Box width={{ xs: "100%", md: "70%" }} sx={{ cursor: "pointer" }}>
+    <Box width={{ xs: "100%", md: "70%" }}>
       {blogs.map((blog) => (
         <Box
           sx={{
@@ -15,8 +17,10 @@ const Content = ({ blogs }: ContentProps) => {
             padding: "20px",
             marginTop: "20px",
             borderRadius: "8px",
+            cursor: "pointer",
+            boxShadow: "0px 8px 16px rgba(255, 255, 255, .1)",
           }}
-          key={blog.id}
+          onClick={() => router.push(`/blog/${blog.slug}`)}
         >
           <Box
             position={"relative"}
@@ -36,7 +40,7 @@ const Content = ({ blogs }: ContentProps) => {
           <Typography variant="body1" color={"gray"}>
             {blog.excerpt}
           </Typography>
-          <Divider sx={{ marginTop: "30px" }} />
+          <Divider />
           <Box sx={{ display: "flex", gap: "10px", marginTop: "20px" }}>
             <Avatar alt={blog.title} src={blog.author.avatar.url} />
             <Box>

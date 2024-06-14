@@ -4,8 +4,10 @@ import Image from "next/image";
 import { SidebarProps } from "./sidebar.props";
 import { format } from "date-fns";
 import { calculateTime } from "src/helpers/time";
+import { useRouter } from "next/router";
 
 const Sidebar = ({ LatestBlogs, categories }: SidebarProps) => {
+  const router = useRouter();
   return (
     <Box width={{ xs: "100%", md: "30%" }} sx={{ cursor: "pointer" }}>
       <Box
@@ -23,7 +25,11 @@ const Sidebar = ({ LatestBlogs, categories }: SidebarProps) => {
           <Typography variant="h5">Latest Blog</Typography>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             {LatestBlogs.map((blog) => (
-              <Box marginTop={"20px"}>
+              <Box
+                marginTop={"20px"}
+                sx={{ cursor: "pointer" }}
+                onClick={() => router.push(`/blog/${blog.slug}`)}
+              >
                 <Box
                   sx={{ display: "flex", gap: "20px", alignItems: "center" }}
                 >

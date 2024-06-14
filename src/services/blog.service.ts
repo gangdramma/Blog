@@ -99,4 +99,40 @@ export const BlogService = {
       throw error;
     }
   },
+  async getDetails(slug: string) {
+    const query = gql`
+      query getDetails($slug: String) {
+        blog(where: { slug: $slug }) {
+          createdAt
+          excerpt
+          id
+          publishedAt
+          slug
+          title
+          updatedAt
+          image {
+            url
+          }
+          category {
+            label
+            slug
+          }
+          author {
+            name
+            avatar {
+              url
+            }
+          }
+          description {
+            html
+            text
+          }
+        }
+      }
+    `;
+    const result = await request<{ blog: IEntity.Blog }>(graphqlAPI, query, {
+      slug,
+    });
+    return result.blog;
+  },
 };

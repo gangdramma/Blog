@@ -21,6 +21,7 @@ export namespace IEntity {
       };
     };
     description: {
+      html: string;
       text: string;
     };
   }

@@ -13,7 +13,7 @@ const IndexPage = ({ blogs, LatestBlogs, categories }: HomePageProps) => {
     <>
       <Layout>
         <Head>
-          <title>Blog Main</title>
+          <title>Blog</title>
         </Head>
         <Box
           sx={{
