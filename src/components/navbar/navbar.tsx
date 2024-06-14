@@ -16,6 +16,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import React from "react";
 import { navItems } from "src/config/constants";
 import CloseIcon from "@mui/icons-material/Close";
+import { useRouter } from "next/router";
 
 interface Props {
   window?: () => Window;
@@ -25,6 +26,7 @@ const drawerWidth = 100;
 
 const Navbar = (props: Props) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const router = useRouter();
   const { window } = props;
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -81,12 +83,17 @@ const Navbar = (props: Props) => {
               flexGrow: 1,
               display: { xs: "none", sm: "block", cursor: "pointer" },
             }}
+            onClick={() => router.push("/")}
           >
             BLOG
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item.route} sx={{ color: "#fff" }}>
+              <Button
+                onClick={() => router.push(item.route)}
+                key={item.route}
+                sx={{ color: "#fff" }}
+              >
                 {item.label}
               </Button>
             ))}
