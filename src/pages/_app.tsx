@@ -6,7 +6,7 @@ import createEmotionCache from "../helpers/create-emotion-cache";
 import Head from "next/head";
 import theme from "src/helpers/theme";
 import CssBaseline from "@mui/material/CssBaseline";
-
+import NextNProgress from "nextjs-progressbar";
 const clientSliderEmotionCache = createEmotionCache();
 
 export interface MyAppProps extends AppProps {
@@ -26,6 +26,13 @@ export default function MyApp(props: MyAppProps) {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <NextNProgress
+          color="#29D"
+          startPosition={0.3}
+          stopDelayMs={200}
+          height={3}
+          showOnShallow={true}
+        />
         <Component {...pageProps} />
       </ThemeProvider>
     </CacheProvider>
