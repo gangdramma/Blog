@@ -2,54 +2,51 @@ import { Avatar, Box, Divider, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import { format } from "date-fns";
+import { ContentProps } from "./content.props";
 
-const Content = () => {
+const Content = ({ blogs }: ContentProps) => {
   return (
     <Box width={{ xs: "100%", md: "70%" }}>
-      <Box
-        sx={{
-          backgroundColor: "rgba(0, 0, 0, .5)",
-          padding: "20px",
-          marginTop: "20px",
-          borderRadius: "8px",
-        }}
-      >
+      {blogs.map((blog) => (
         <Box
-          position={"relative"}
-          width={"100%"}
-          height={{ xs: "30vh", md: "50vh" }}
+          sx={{
+            backgroundColor: "rgba(0, 0, 0, .5)",
+            padding: "20px",
+            marginTop: "20px",
+            borderRadius: "8px",
+          }}
+          key={blog.id}
         >
-          <Image
-            fill
-            src={
-              "https://platinumlist.net/guide/wp-content/uploads/2023/03/8359_img_worlds_of_adventure-big1613913137.jpg-1024x683.webp"
-            }
-            alt={"platinumlist.net"}
-            style={{ objectFit: "cover", borderRadius: "10px" }}
-          />
-        </Box>
-        <Typography variant="h4" marginTop={"30px"}>
-          Title
-        </Typography>
-        <Typography variant="body1" color={"gray"}>
-          description
-        </Typography>
-        <Divider sx={{ marginTop: "30px" }} />
-        <Box sx={{ display: "flex", gap: "10px", marginTop: "20px" }}>
-          <Avatar
-            alt={""}
-            src={
-              "https://platinumlist.net/guide/wp-content/uploads/2023/03/8359_img_worlds_of_adventure-big1613913137.jpg-1024x683.webp"
-            }
-          />
-          <Box>
-            <Typography>Author name</Typography>
-            <Box color={"gray"}>
-              {format(new Date(), "dd MMM, yyyy")} &#x2022; 5min read
+          <Box
+            position={"relative"}
+            width={"100%"}
+            height={{ xs: "30vh", md: "50vh" }}
+          >
+            <Image
+              fill
+              src={blog.image.url}
+              alt={blog.title}
+              style={{ objectFit: "cover", borderRadius: "10px" }}
+            />
+          </Box>
+          <Typography variant="h4" marginTop={"30px"}>
+            {blog.title}
+          </Typography>
+          <Typography variant="body1" color={"gray"}>
+            {blog.excerpt}
+          </Typography>
+          <Divider sx={{ marginTop: "30px" }} />
+          <Box sx={{ display: "flex", gap: "10px", marginTop: "20px" }}>
+            <Avatar alt={blog.title} src={blog.author.avatar.url} />
+            <Box>
+              <Typography>{blog.author.name}</Typography>
+              <Box color={"gray"}>
+                {format(blog.createdAt, "dd MMM, yyyy")} &#x2022; 5min read
+              </Box>
             </Box>
           </Box>
         </Box>
-      </Box>
+      ))}
     </Box>
   );
 };

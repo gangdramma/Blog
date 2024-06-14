@@ -32,39 +32,9 @@ const Footer = () => {
               outline: "none",
             },
           }}
-          href="https://t.me/gang_dramma"
-        >
-          <TelegramIcon />
-        </Button>
-        <Button
-          sx={{
-            backgroundColor: "#272727",
-            color: "white",
-            "&:hover": {
-              backgroundColor: "#272727",
-            },
-            "&:focus": {
-              outline: "none",
-            },
-          }}
           href="https://www.instagram.com/gang_dramma?igsh=MWYyZnZsMXJ5czIxYQ=="
         >
           <InstagramIcon />
-        </Button>
-        <Button
-          sx={{
-            backgroundColor: "#272727",
-            color: "white",
-            "&:hover": {
-              backgroundColor: "#272727",
-            },
-            "&:focus": {
-              outline: "none",
-            },
-          }}
-          href="https://github.com/gangdramma"
-        >
-          <GitHubIcon />
         </Button>
       </Box>
     </Box>

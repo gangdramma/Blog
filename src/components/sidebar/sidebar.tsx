@@ -1,15 +1,15 @@
-import { Box, Button, Divider, Typography } from "@mui/material";
+import { Avatar, Box, Button, Divider, Typography } from "@mui/material";
 import React, { Fragment } from "react";
 import Image from "next/image";
-import { navItems } from "src/config/constants";
+import { SidebarProps } from "./sidebar.props";
+import { format } from "date-fns";
 
-const Sidebar = () => {
+const Sidebar = ({ LatestBlogs }: SidebarProps) => {
   return (
     <Box width={{ xs: "100%", md: "30%" }}>
       <Box
         position={"sticky"}
         top={"100px"}
-        // border="1px solid gray"
         sx={{ transition: "all .3s ease", borderRadius: "8px" }}
       >
         <Box
@@ -21,46 +21,43 @@ const Sidebar = () => {
         >
           <Typography variant="h5">Latest Blog</Typography>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <Box marginTop={"20px"}>
-              <Box sx={{ display: "flex", gap: "20px", alignItems: "center" }}>
-                <Image
-                  src="https://vividreal.com/wp-content/uploads/2020/10/10-Best-Blogging-Platforms-to-Help-You-Get-Content-out-in-the-Wild-2020.jpg"
-                  alt="Latest Blog"
-                  width={100}
-                  height={100}
-                  style={{ objectFit: "cover", borderRadius: "8px" }}
-                />
+            {LatestBlogs.map((blog) => (
+              <Box marginTop={"20px"}>
                 <Box
-                  sx={{ display: "flex", flexDirection: "column", gap: "10px" }}
+                  sx={{ display: "flex", gap: "20px", alignItems: "center" }}
                 >
-                  <Typography variant="body1">Latest blog</Typography>
-                  <Typography variant="body1" sx={{ opacity: 0.4 }}>
-                    info
-                  </Typography>
+                  <Image
+                    src={blog.image.url}
+                    alt={blog.title}
+                    width={100}
+                    height={100}
+                    style={{ objectFit: "cover", borderRadius: "8px" }}
+                  />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "10px",
+                    }}
+                  >
+                    <Typography variant="body1">{blog.title}</Typography>
+                    <Box
+                      sx={{ display: "flex", gap: "10px", marginTop: "10px" }}
+                    >
+                      <Avatar alt={blog.title} src={blog.author.avatar.url} />
+                      <Box>
+                        <Typography>{blog.author.name}</Typography>
+                        <Box color={"gray"}>
+                          {format(blog.createdAt, "dd MMM, yyyy")} &#x2022; 5min
+                          read
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
                 </Box>
+                <Divider sx={{ marginTop: "20px" }} />
               </Box>
-              <Divider sx={{ marginTop: "20px" }} />
-            </Box>
-            <Box marginTop={"20px"}>
-              <Box sx={{ display: "flex", gap: "20px", alignItems: "center" }}>
-                <Image
-                  src="https://vividreal.com/wp-content/uploads/2020/10/10-Best-Blogging-Platforms-to-Help-You-Get-Content-out-in-the-Wild-2020.jpg"
-                  alt="Latest Blog"
-                  width={100}
-                  height={100}
-                  style={{ objectFit: "cover", borderRadius: "8px" }}
-                />
-                <Box
-                  sx={{ display: "flex", flexDirection: "column", gap: "10px" }}
-                >
-                  <Typography variant="body1">Latest blog</Typography>
-                  <Typography variant="body1" sx={{ opacity: 0.4 }}>
-                    info
-                  </Typography>
-                </Box>
-              </Box>
-              <Divider sx={{ marginTop: "20px" }} />
-            </Box>
+            ))}
           </Box>
         </Box>
         <Box
@@ -73,14 +70,19 @@ const Sidebar = () => {
         >
           <Typography variant="h5">Category</Typography>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
-            {navItems.map((nav) => (
-              <Fragment key={nav.route}>
-                <Button
-                  fullWidth
-                  sx={{ justifyContent: "flex-start", height: "50px" }}
-                >
-                  {nav.label}
-                </Button>
+            {LatestBlogs.map((nav) => (
+              <Fragment key={nav.id}>
+                {nav.category && (
+                  <>
+                    <Button
+                      fullWidth
+                      sx={{ justifyContent: "flex-start", height: "50px" }}
+                    >
+                      {nav.category.label}
+                    </Button>
+                    <Divider sx={{ marginTop: "5px" }} />
+                  </>
+                )}
               </Fragment>
             ))}
           </Box>
