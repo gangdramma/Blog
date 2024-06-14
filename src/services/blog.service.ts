@@ -3,10 +3,6 @@ import { IEntity } from "src/interfaces/blogs";
 
 const graphqlAPI = process.env.HYGRAPH_ENDPOINT as string;
 
-if (!graphqlAPI) {
-  throw new Error("endpoint is not defined in the environment variables.");
-}
-
 export const BlogService = {
   async getAllBlogs(): Promise<IEntity.Blogs> {
     const query = gql`
