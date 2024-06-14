@@ -52,7 +52,10 @@ const Navbar = (props: Props) => {
         {navItems.map((item) => (
           <ListItem key={item.label} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item.label} />
+              <ListItemText
+                onClick={() => router.push(item.route)}
+                primary={item.label}
+              />
             </ListItemButton>
           </ListItem>
         ))}
